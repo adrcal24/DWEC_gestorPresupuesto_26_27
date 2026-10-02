@@ -23,74 +23,122 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto(descripcion, valor, etiquetas, fecha) {
+function CrearGasto(descripcion, valor = 0, fecha, ...etiquetas) {
     this.descripcion = descripcion;
-    if (valor < 0 || isNaN(valor))
-    {
+    
+    if (valor < 0 || isNaN(valor)) {
         this.valor = 0;
-    }
-    else
-    {
+    } else {
         this.valor = valor;
     }
 
-    if(etiquetas === undefined || etiquetas === null)
-    {
-        this.etiquetas = [];
-    }
-    else
-    {
-        this.etiquetas = etiquetas;
+    let parsedDate = Date.parse(fecha);
+    if (typeof fecha === 'string' && !isNaN(parsedDate)) {
+        this.fecha = parsedDate;
+    } else {
+        this.fecha = Date.now();
     }
 
-    if (isNaN(Date.parse(fecha))) 
-    {
-        this.fecha = new Date();
-    } 
-    else 
-    {
-        this.fecha = Date.parse(fecha);
-    }
+    this.etiquetas = [];
 
-
-    this.mostrarGasto = function()
-    {
-        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €`;
-    }
-
-    this.actualizarDescripcion = function(nuevaDescripcion)
-    {
-        this.descripcion = nuevaDescripcion;
-    }
-
-    this.actualizarValor = function(nuevoValor)
-    {
-        if (isNaN(nuevoValor) || nuevoValor < 0)
-        {
-            console.error("Has introducido un número negativo o no has introducido un número");
-        }
-        else
-        {
-            this.valor = nuevoValor;
-        }
-    }
-
-    this.anyadirEtiquetas = function(etiqueta)
-    {
-        if (Array.isArray(etiqueta))
-        {
-            for (let i = 0; i < etiqueta.length; i++)
-            {
-                this.etiquetas.push(etiqueta[i]);
+    this.anyadirEtiquetas = function(...nuevasEtiquetas) {
+        for (let i = 0; i < nuevasEtiquetas.length; i++) {
+            let et = nuevasEtiquetas[i];
+            if (Array.isArray(et)) {
+                for (let j = 0; j < et.length; j++) {
+                    if (typeof et[j] === 'string' && !this.etiquetas.includes(et[j])) {
+                        this.etiquetas.push(et[j]);
+                    }
+                }
+            } else if (typeof et === 'string' && !this.etiquetas.includes(et)) {
+                this.etiquetas.push(et);
             }
         }
-        
+    };
+
+    if (etiquetas.length > 0) {
+        this.anyadirEtiquetas(...etiquetas);
     }
+
+    this.borrarEtiquetas = function(...etiquetasABorrar) {
+        for (let i = 0; i < etiquetasABorrar.length; i++) {
+            let et = etiquetasABorrar[i];
+            if (Array.isArray(et)) {
+                for (let j = 0; j < et.length; j++) {
+                    let index = this.etiquetas.indexOf(et[j]);
+                    if (index !== -1) {
+                        this.etiquetas.splice(index, 1);
+                    }
+                }
+            } else {
+                let index = this.etiquetas.indexOf(et);
+                if (index !== -1) {
+                    this.etiquetas.splice(index, 1);
+                }
+            }
+        }
+    };
+
+    this.actualizarFecha = function(nuevaFecha) {
+        let parsedDate = Date.parse(nuevaFecha);
+        if (typeof nuevaFecha === 'string' && !isNaN(parsedDate)) {
+            this.fecha = parsedDate;
+        }
+    };
+
+    this.mostrarGasto = function() {
+        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €`;
+    };
+
+    this.mostrarGastoCompleto = function() {
+        let fechaObj = new Date(this.fecha);
+        let fechaTexto = fechaObj.toLocaleDateString('es-ES');
+        
+        let textoEtiquetas = "";
+        for (let i = 0; i < this.etiquetas.length; i++) {
+            textoEtiquetas += this.etiquetas[i];
+            if (i < this.etiquetas.length - 1) {
+                textoEtiquetas += ", ";
+            }
+        }
+
+        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €. Fecha: ${fechaTexto}. Etiquetas: ${textoEtiquetas}`;
+    };
+
+    this.actualizarDescripcion = function(nuevaDescripcion) {
+        this.descripcion = nuevaDescripcion;
+    };
+
+    this.actualizarValor = function(nuevoValor) {
+        if (isNaN(nuevoValor) || nuevoValor < 0) {
+            console.error("Has introducido un número negativo o no has introducido un número");
+        } else {
+            this.valor = nuevoValor;
+        }
+    };
 }
 
 function listarGastos()
 {
     return gastos;
+}
+
+function anyadirGasto(gasto) {
+    gasto.id = idGasto;
+    idGasto++;
+    gastos.push(gasto);
+}
+
+function borrarGasto() {
+    // TODO: Implementar más adelante
+}
+
+function calcularTotalGastos() {
+    // TODO: Implementar más adelante
+}
+
+function calcularBalance() {
+    // TODO: Implementar más adelante
 }
 
 
