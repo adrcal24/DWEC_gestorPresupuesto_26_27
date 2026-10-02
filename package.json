@@ -19,7 +19,11 @@
     "type": "module",
     "devDependencies": {
         "chai": "^5.1.1",
+<<<<<<< HEAD
         "cypress": "^16.1.0",
+=======
+        "cypress": "^16.1.1",
+>>>>>>> 80a6e30e5aba1d54325b690c0ff28ae63e5e937c
         "mocha": "^12.0.2"
     },
     "dependencies": {
@@ -28,6 +32,10 @@
         "eslint-plugin-cypress": "^2.12.1"
     },
     "allowScripts": {
+<<<<<<< HEAD
         "cypress@16.1.0": true
+=======
+        "cypress@13.15.0": true
+>>>>>>> 80a6e30e5aba1d54325b690c0ff28ae63e5e937c
     }
 }
