@@ -2,6 +2,8 @@
 
 // TODO: Variable global
 let presupuesto = 0;
+let gastos = [];
+let idGasto = 0;
 
 
 function actualizarPresupuesto(dinero) {
@@ -21,7 +23,7 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto(descripcion, valor) {
+function CrearGasto(descripcion, valor, etiquetas, fecha) {
     this.descripcion = descripcion;
     if (valor < 0 || isNaN(valor))
     {
@@ -31,6 +33,25 @@ function CrearGasto(descripcion, valor) {
     {
         this.valor = valor;
     }
+
+    if(etiquetas === undefined || etiquetas === null)
+    {
+        this.etiquetas = [];
+    }
+    else
+    {
+        this.etiquetas = etiquetas;
+    }
+
+    if (isNaN(Date.parse(fecha))) 
+    {
+        this.fecha = new Date();
+    } 
+    else 
+    {
+        this.fecha = Date.parse(fecha);
+    }
+
 
     this.mostrarGasto = function()
     {
@@ -53,7 +74,26 @@ function CrearGasto(descripcion, valor) {
             this.valor = nuevoValor;
         }
     }
+
+    this.anyadirEtiquetas = function(etiqueta)
+    {
+        if (Array.isArray(etiqueta))
+        {
+            for (let i = 0; i < etiqueta.length; i++)
+            {
+                this.etiquetas.push(etiqueta[i]);
+            }
+        }
+        
+    }
 }
+
+function listarGastos()
+{
+    return gastos;
+}
+
+
 
     
 
@@ -63,5 +103,10 @@ function CrearGasto(descripcion, valor) {
 export   {
     mostrarPresupuesto,
     actualizarPresupuesto,
-    CrearGasto
+    CrearGasto,
+    listarGastos,
+    anyadirGasto,
+    borrarGasto,
+    calcularTotalGastos,
+    calcularBalance 
 }
