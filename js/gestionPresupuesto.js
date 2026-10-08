@@ -92,7 +92,7 @@ function CrearGasto(descripcion, valor = 0, fecha, ...etiquetas) {
 
     this.mostrarGastoCompleto = function() {
         let fechaObj = new Date(this.fecha);
-        let fechaTexto = fechaObj.toLocaleString('es-ES');
+        let fechaTexto = fechaObj.toLocaleString('');
         
         let textoEtiquetas = "";
         for (let i = 0; i < this.etiquetas.length; i++) {
