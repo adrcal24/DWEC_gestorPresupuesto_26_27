@@ -92,17 +92,19 @@ function CrearGasto(descripcion, valor = 0, fecha, ...etiquetas) {
 
     this.mostrarGastoCompleto = function() {
         let fechaObj = new Date(this.fecha);
-        let fechaTexto = fechaObj.toLocaleDateString('es-ES');
+        let fechaTexto = fechaObj.toLocaleString();
         
         let textoEtiquetas = "";
         for (let i = 0; i < this.etiquetas.length; i++) {
-            textoEtiquetas += this.etiquetas[i];
+            textoEtiquetas += "- " + this.etiquetas[i];
             if (i < this.etiquetas.length - 1) {
-                textoEtiquetas += ", ";
+                textoEtiquetas += "\n";
             }
         }
 
-        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €. Fecha: ${fechaTexto}. Etiquetas: ${textoEtiquetas}`;
+        return "Gasto correspondiente a " + this.descripcion + " con valor " + this.valor + " €.\n" +
+            "Fecha: " + fechaTexto + "\n" +
+            "Etiquetas:\n" + textoEtiquetas;
     };
 
     this.actualizarDescripcion = function(nuevaDescripcion) {
@@ -129,12 +131,21 @@ function anyadirGasto(gasto) {
     gastos.push(gasto);
 }
 
-function borrarGasto() {
-    // TODO: Implementar más adelante
+function borrarGasto(id) {
+    for (var i = 0; i < gastos.length; i++) {
+        if (gastos[i].id === id) {
+            gastos.splice(i, 1);
+            break;
+        }
+    }
 }
 
 function calcularTotalGastos() {
-    // TODO: Implementar más adelante
+    let total = 0;
+    for (let i = 0; i < gastos.length; i++) {
+        total += gastos[i].valor;
+    }
+    return total;
 }
 
 function calcularBalance() {
