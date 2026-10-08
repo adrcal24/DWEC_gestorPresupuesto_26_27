@@ -92,19 +92,17 @@ function CrearGasto(descripcion, valor = 0, fecha, ...etiquetas) {
 
     this.mostrarGastoCompleto = function() {
         let fechaObj = new Date(this.fecha);
-        let fechaTexto = fechaObj.toLocaleString();
+        let fechaTexto = fechaObj.toLocaleString('es-ES');
         
         let textoEtiquetas = "";
         for (let i = 0; i < this.etiquetas.length; i++) {
-            textoEtiquetas += "- " + this.etiquetas[i];
-            if (i < this.etiquetas.length - 1) {
-                textoEtiquetas += "\n";
-            }
+            textoEtiquetas = textoEtiquetas + "- " + this.etiquetas[i] + "\n";
         }
 
         return "Gasto correspondiente a " + this.descripcion + " con valor " + this.valor + " €.\n" +
             "Fecha: " + fechaTexto + "\n" +
-            "Etiquetas:\n" + textoEtiquetas;
+            "Etiquetas:\n" + 
+            textoEtiquetas;
     };
 
     this.actualizarDescripcion = function(nuevaDescripcion) {
