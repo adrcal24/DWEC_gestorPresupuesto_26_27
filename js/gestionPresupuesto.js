@@ -240,41 +240,7 @@ function filtrarGastos(filtro) {
 }
 
 function agruparGastos(periodo = "mes", etiquetas, fechaDesde, fechaHasta) {
-    if (fechaHasta === undefined) {
-        let hoy = new Date();
-        let anio = hoy.getFullYear();
-        let mes = String(hoy.getMonth() + 1).padStart(2, '0');
-        let dia = String(hoy.getDate()).padStart(2, '0');
-        fechaHasta = `${anio}-${mes}-${dia}`;
-    }
 
-    let filtro = {};
-    
-    if (fechaDesde !== undefined) {
-        filtro.fechaDesde = fechaDesde;
-    }
-    
-    if (fechaHasta !== undefined) {
-        filtro.fechaHasta = fechaHasta;
-    }
-    
-    if (etiquetas !== undefined && Array.isArray(etiquetas) && etiquetas.length > 0) {
-        filtro.etiquetasTiene = etiquetas;
-    }
-
-    let gastosFiltrados = filtrarGastos(filtro);
-
-    return gastosFiltrados.reduce(function(acc, gasto) {
-        let periodoAgrupacion = gasto.obtenerPeriodoAgrupacion(periodo);
-
-        if (acc[periodoAgrupacion] === undefined) {
-            acc[periodoAgrupacion] = 0;
-        }
-
-        acc[periodoAgrupacion] += gasto.valor;
-
-        return acc;
-    }, {});
 }
 
 
