@@ -275,6 +275,7 @@ function agruparGastos(periodo = "mes", etiquetas, fechaDesde, fechaHasta) {
 
         return acc;
     }, {});
+    
 }
 
 
