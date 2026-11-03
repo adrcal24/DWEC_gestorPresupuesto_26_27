@@ -21,3 +21,34 @@ gestionP.anyadirGasto(gasto6);
 
 gestionPW.mostrarDatoEnId("gastos-totales", gestionP.calcularTotalGastos());
 gestionPW.mostrarDatoEnId("balance-total", gestionP.calcularBalance());
+
+let listaGastos = gestionP.listarGastos();
+
+for (let i = 0; i < listaGastos.length; i++) {
+    let gasto = listaGastos[i];
+    gestionPW.mostrarGastoWeb("listado-gastos-completo", gasto);
+}
+
+let filtrados1 = gestionP.filtrarGastos({ mes: 9, anyo: 2021 });
+
+for (let gasto of filtrados1) {
+    gestionPW.mostrarGastoWeb("listado-gastos-filtrado-1", gasto);
+}
+
+let filtrados2 = gestionP.filtrarGastos({ mayorQue: 50 });
+
+for (let gasto of filtrados2) {
+    gestionPW.mostrarGastoWeb("listado-gastos-filtrado-2", gasto);
+}
+
+let filtrados3 = gestionP.filtrarGastos({ mayorQue: 200, etiqueta: "seguros" });
+
+for (let gasto of filtrados3) {
+    gestionPW.mostrarGastoWeb("listado-gastos-filtrado-3", gasto);
+}
+
+let filtrados4 = gestionP.filtrarGastos({ menorQue: 50, etiquetas: ["comida", "transporte"] });
+
+for (let gasto of filtrados4) {
+    gestionPW.mostrarGastoWeb("listado-gastos-filtrado-4", gasto);
+}
