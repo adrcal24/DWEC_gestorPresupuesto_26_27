@@ -1,0 +1,1 @@
+import * as gasto from /js/gestionPresupuesto.js;
