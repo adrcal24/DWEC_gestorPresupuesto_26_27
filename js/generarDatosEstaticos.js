@@ -52,3 +52,7 @@ let filtrados4 = gestionP.filtrarGastos({ menorQue: 50, etiquetas: ["comida", "t
 for (let gasto of filtrados4) {
     gestionPW.mostrarGastoWeb("listado-gastos-filtrado-4", gasto);
 }
+
+gestionPW.mostrarGastosAgrupadosWeb("agrupacion-dia", gestionP.agruparGastos("dia"), "dia");
+gestionPW.mostrarGastosAgrupadosWeb("agrupacion-mes", gestionP.agruparGastos("mes"), "mes");
+gestionPW.mostrarGastosAgrupadosWeb("agrupacion-anyo", gestionP.agruparGastos("anyo"), "anyo");
