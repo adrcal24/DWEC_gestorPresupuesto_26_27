@@ -18,3 +18,6 @@ gestionP.anyadirGasto(gasto3);
 gestionP.anyadirGasto(gasto4);
 gestionP.anyadirGasto(gasto5);
 gestionP.anyadirGasto(gasto6);
+
+gestionPW.mostrarDatoEnId("gastos-totales", gestionP.calcularTotalGastos());
+gestionPW.mostrarDatoEnId("balance-total", gestionP.calcularBalance());
