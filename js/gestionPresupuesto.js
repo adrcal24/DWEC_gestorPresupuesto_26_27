@@ -14,9 +14,8 @@ function actualizarPresupuesto(dinero) {
     }
         
     presupuesto = dinero;
-    return presupuesto;
-    
-    
+    presupuesto = Number(presupuesto.toFixed(2));
+    return presupuesto; 
 }
 
 function mostrarPresupuesto() {
@@ -163,7 +162,7 @@ function calcularTotalGastos() {
     for (let i = 0; i < gastos.length; i++) {
         total += gastos[i].valor;
     }
-    return total;
+    return Number(total.toFixed(2));
 }
 
 function calcularBalance() {

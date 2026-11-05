@@ -14,7 +14,7 @@ function mostrarGastoWeb(idElemento, gasto)
 
     let divDescripcion = document.createElement("div");
     divDescripcion.className = "gasto-descripcion";
-    divDescripcion.textContent = gasto.descipcion;
+    divDescripcion.textContent = gasto.descripcion;
     divGasto.appendChild(divDescripcion);
 
     let divFecha = document.createElement("div");
@@ -48,6 +48,7 @@ function mostrarGastoWeb(idElemento, gasto)
 function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo)
 {
     let elemento = document.getElementById(idElemento);
+    
 
     let divAgrup = document.createElement("div");
     divAgrup.className = "agrupacion";
@@ -65,12 +66,12 @@ function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo)
 
         let spanClave = document.createElement("span");
         spanClave.className = "agrupacion-dato-clave";
-        spanClave.textContent = clave;
+        spanClave.textContent = clave + " - ";
         divDato.appendChild(spanClave);
 
         let spanValor = document.createElement("span");
         spanValor.className = "agrupacion-dato-valor";
-        spanValor.textContent = valor;
+        spanValor.textContent = `${Number(valor).toFixed(2)} €`;
         divDato.appendChild(spanValor);
 
         divAgrup.appendChild(divDato);
