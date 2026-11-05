@@ -30,7 +30,7 @@ for (let i = 0; i < listaGastos.length; i++) {
 }
 
 
-let filtrados1 = gestionP.filtrarGastos({ mes: 9, anyo: 2021 });
+let filtrados1 = gestionP.filtrarGastos({ fechaDesde: "2021-09-01", fechaHasta: "2021-09-30" });
 for (let gasto of filtrados1) {
     gestionPW.mostrarGastoWeb("listado-gastos-filtrado-1", gasto);
 }
