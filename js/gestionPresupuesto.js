@@ -34,8 +34,9 @@ function CrearGasto(descripcion, valor = 0, fecha, ...etiquetas) {
     let parsedDate = new Date(fecha);
     if (typeof fecha === 'string' && !isNaN(parsedDate)) {
         this.fecha = parsedDate;
+        
     } else {
-        this.fecha = Date.now();
+        this.fecha = new Date();
     }
 
     this.etiquetas = [];
